@@ -1,0 +1,33 @@
+$(".popOpen").bind('click',function(event){
+  event.preventDefault();//이벤트취소(링크동장멈추게)
+  var hrefLink = $(this).attr('href');
+  var prop = $(this).attr('data-i');
+  $.fancybox({
+      'autoDimensions': false,
+      'showCloseButton': false,
+      'width': layerCheck,
+      'padding': 0,
+      'href':hrefLink,
+      'scrolling':'no',
+      'type': 'iframe',
+      'onComplete': function () {
+          $('#fancybox-frame').load(function () { // wait for frame to load and then gets it's height
+          $('#fancybox-content').height($(this).contents().find('body').height());
+          $.fancybox.resize();
+          $('#fancybox-frame').focus();
+          });
+      },
+      onClosed: function() {
+        $('.'+prop+'').focus();
+      }
+  });
+});
+
+
+
+
+
+
+
+
+<a href="/popup/popProcedure.do" class="popOpen ji1" data-i="ji1"><span>입점 제안</span></a>
